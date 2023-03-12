@@ -13,7 +13,7 @@ import * as math from 'lib0/math'
 import { createMutex } from 'lib0/mutex'
 
 import * as Y from 'yjs' // eslint-disable-line
-import Peer from 'simple-peer/simplepeer.min.js'
+// import Peer from 'simple-peer/simplepeer.min.js'
 
 import * as syncProtocol from 'y-protocols/sync'
 import * as awarenessProtocol from 'y-protocols/awareness'
@@ -180,6 +180,7 @@ export class WebrtcConn {
     /**
      * @type {any}
      */
+    /*
     this.peer = new Peer({ initiator, ...room.provider.peerOpts })
     this.peer.on('signal', signal => {
       publishSignalingMessage(signalingConn, room, { to: remotePeerId, from: room.peerId, type: 'signal', signal })
@@ -230,6 +231,7 @@ export class WebrtcConn {
         sendWebrtcConn(this, answer)
       }
     })
+    */
   }
 
   destroy () {
@@ -510,13 +512,13 @@ export class SignalingConn extends ws.WebsocketClient {
             switch (data.type) {
               case 'announce':
                 if (webrtcConns.size < room.provider.maxConns) {
-                  map.setIfUndefined(webrtcConns, data.from, () => new WebrtcConn(this, true, data.from, room))
+                  //map.setIfUndefined(webrtcConns, data.from, () => new WebrtcConn(this, true, data.from, room))
                   emitPeerChange()
                 }
                 break
               case 'signal':
                 if (data.to === peerId) {
-                  map.setIfUndefined(webrtcConns, data.from, () => new WebrtcConn(this, false, data.from, room)).peer.signal(data.signal)
+                  //map.setIfUndefined(webrtcConns, data.from, () => new WebrtcConn(this, false, data.from, room)).peer.signal(data.signal)
                   emitPeerChange()
                 }
                 break
